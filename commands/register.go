@@ -11,6 +11,7 @@ type CommandFunc func(client *twitch.Client, message twitch.PrivateMessage)
 var commandMap = map[string]CommandFunc{
 	"hora":     Time,
 	"bot":      Hello,
+	"quiz":     Trivia,
 	"paraquiz": StopTrivia,
 }
 
