@@ -18,6 +18,7 @@ func OnMessage(client *twitch.Client, message twitch.PrivateMessage, prefix stri
 	}
 
 	commands.CheckTriviaAnswer(client, message)
+	commands.CheckScrambleAnswer(client, message)
 
 	if strings.Contains(strings.ToLower(message.Message), "bot") {
 		client.Say(message.Channel, "👀 Chamou?")

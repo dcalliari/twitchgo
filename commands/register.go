@@ -9,10 +9,12 @@ import (
 type CommandFunc func(client *twitch.Client, message twitch.PrivateMessage)
 
 var commandMap = map[string]CommandFunc{
-	"hora":     Time,
-	"bot":      Hello,
-	"quiz":     Trivia,
-	"paraquiz": StopTrivia,
+	"hora":          Time,
+	"bot":           Hello,
+	"quiz":          Trivia,
+	"paraquiz":      StopTrivia,
+	"embaralha":     Scramble,
+	"paraembaralha": StopScramble,
 }
 
 func Handle(client *twitch.Client, message twitch.PrivateMessage, prefix string) {
