@@ -15,6 +15,18 @@ var commandMap = map[string]CommandFunc{
 	"paraquiz":      StopTrivia,
 	"embaralha":     Scramble,
 	"paraembaralha": StopScramble,
+	"roleta":        Roulette,
+	"pontos":        Points,
+	"dar":           GivePoints,
+	"doar":          GivePoints,
+	"enviar":        GivePoints,
+	"top":           TopPoints,
+	"toppontos":     TopPoints,
+	"topperda":      TopGambleLoss,
+	"rank":          Rank,
+	"ranking":       Rank,
+	"addpontos":     AddPointsCommand,
+	"diario":        DailyPoints,
 }
 
 func Handle(client *twitch.Client, message twitch.PrivateMessage, prefix string) {

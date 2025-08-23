@@ -5,10 +5,12 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/gempir/go-twitch-irc/v4"
 	"github.com/joho/godotenv"
 
+	"twitchgo/commands"
 	"twitchgo/handlers"
 )
 
@@ -40,6 +42,17 @@ func main() {
 
 	client.Join(channel)
 
+	go func() {
+		ticker := time.NewTicker(5 * time.Minute)
+		defer ticker.Stop()
+
+		for range ticker.C {
+			if err := commands.SavePointsData(); err != nil {
+				log.Printf("Error saving points data: %v", err)
+			}
+		}
+	}()
+
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
@@ -51,5 +64,10 @@ func main() {
 
 	<-quit
 	log.Println("🛑 Finalizando conexão com a Twitch...")
+
+	if err := commands.SavePointsData(); err != nil {
+		log.Printf("Error saving points data on shutdown: %v", err)
+	}
+
 	client.Disconnect()
 }
