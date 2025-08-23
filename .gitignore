@@ -1,6 +1,4 @@
-.env
-twitchgo.exe
-data/trivia_questions.json
+data/*
 
 # Binaries for programs and plugins
 *.exe
